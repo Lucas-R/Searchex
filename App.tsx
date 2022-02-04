@@ -19,7 +19,6 @@ export default function App() {
         <Stack.Screen 
           name="pokemon" 
           component={Pokemon} 
-          pokemonSelected={({ params }) => params}
           options={{
             title: 'Pokemón',
           }}

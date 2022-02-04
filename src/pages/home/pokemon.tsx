@@ -1,6 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, Image, View } from "react-native";
 
+interface Pokemon {
+  name: string,
+  abilities: [Abilities],
+  types: [Types]
+}
+
+type Abilities = {
+  ability: Name
+}
+
+type Types = {
+    type: Name
+}
+
+type Name = {
+  name: string
+}
+
 const sprites = [
   'back_default',
   'back_female',
@@ -36,9 +54,9 @@ const colors = {
 }
 
 
-export const Pokemon = (props) => {
+export const Pokemon = (props : any) => {
     const linkPokemon = props.route.params.linkPokemon;
-    const [pokemon, setPokemon] = useState(null);
+    const [pokemon, setPokemon] = useState<Pokemon>();
     const pokemonNumber = linkPokemon.replace('https://pokeapi.co/api/v2/pokemon/', '').replace('/', '');
     const imgPokemon = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/'+pokemonNumber+'.png';
 

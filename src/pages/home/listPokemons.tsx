@@ -1,7 +1,6 @@
 import React from "react";
 import { FlatList, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 
-
 export const ListPokemons = ({ list, search, myNavigate }) => {
 
   const viewPokemon = (link) => {
@@ -31,7 +30,7 @@ export const ListPokemons = ({ list, search, myNavigate }) => {
     <FlatList
       data={data}
       renderItem={renderItem}
-      keyExtractor={(item, index) => index}
+      keyExtractor={(item, index) => index.toString()}
       contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 16 }}
     />
   );
