@@ -2,9 +2,21 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, Image, View } from "react-native";
 
 interface Pokemon {
-  name: String,
-  abilities: [String],
-  types: [String]
+  name: string,
+  abilities: [Abilities],
+  types: [Types]
+}
+
+type Abilities = {
+  ability: Name
+}
+
+type Types = {
+    type: Name
+}
+
+type Name = {
+  name: string
 }
 
 const sprites = [

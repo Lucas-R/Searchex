@@ -30,7 +30,7 @@ export const ListPokemons = ({ list, search, myNavigate }) => {
     <FlatList
       data={data}
       renderItem={renderItem}
-      keyExtractor={(item, index) => index}
+      keyExtractor={(item, index) => index.toString()}
       contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 16 }}
     />
   );

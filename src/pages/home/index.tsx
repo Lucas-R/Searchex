@@ -3,9 +3,9 @@ import { StyleSheet, View, TextInput, TouchableOpacity, Pressable, Text, SafeAre
 import { ListPokemons } from "./listPokemons";
 
 interface Pokemon {
-    results: String,
-    previous: String,
-    next: String
+    results: object,
+    previous: string,
+    next: string
 }
 
 interface RegistrationProps {
@@ -13,11 +13,9 @@ interface RegistrationProps {
 }
 
 export const Home = ({ navigation :  { navigate }} : RegistrationProps) => {
-    const [listPokemons, setListPokemons] = useState<Pokemon>({results:[]});
+    const [listPokemons, setListPokemons] = useState<Pokemon>();
     const [searchPokemon, changeSearchPokemon] = useState('');
     const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon/?limit=99999');
-    let disabledPrevious = listPokemons.previous == null ? true : false;
-    let disabledNext = listPokemons.next == null ? true : false;
 
     useEffect(() => {
         fetch(url)
@@ -26,34 +24,43 @@ export const Home = ({ navigation :  { navigate }} : RegistrationProps) => {
         .then(response => setListPokemons(response));
     }, [url, searchPokemon]);
 
-    return(
-        <View style={styles.container}>
-            <TextInput
-                placeholder="Search pokemón"
-                style={styles.input}
-                onChangeText={changeSearchPokemon}
-                value={searchPokemon}
-            />
-            
-            <ListPokemons list={listPokemons} search={searchPokemon} myNavigate={navigate} />
+    if(listPokemons){
+        let disabledPrevious = listPokemons.previous == null ? true : false;
+        let disabledNext = listPokemons.next == null ? true : false;
 
-            <SafeAreaView style={ styles.wrapperPagination }>
-                <Pressable
-                    disabled={ disabledPrevious }
-                    style={ disabledPrevious ? styles.buttonDisabled : styles.button }
-                    onPress={() => setUrl(listPokemons.previous)}
-                >
-                    <Text style={styles.text}> Previous </Text>
-                </Pressable>
-                <TouchableOpacity
-                    disabled={ disabledNext }
-                    style={ disabledNext ? styles.buttonDisabled : styles.button }
-                    onPress={() => setUrl(listPokemons.next)}
-                >
-                    <Text style={styles.text}> Next </Text>
-                </TouchableOpacity>
-            </SafeAreaView>
-        </View>
+        return(
+            <View style={styles.container}>
+                <TextInput
+                    placeholder="Search pokemón"
+                    style={styles.input}
+                    onChangeText={changeSearchPokemon}
+                    value={searchPokemon}
+                />
+                
+                <ListPokemons list={listPokemons} search={searchPokemon} myNavigate={navigate} />
+    
+                <SafeAreaView style={ styles.wrapperPagination }>
+                    <Pressable
+                        disabled={ disabledPrevious }
+                        style={ disabledPrevious ? styles.buttonDisabled : styles.button }
+                        onPress={() => setUrl(listPokemons.previous)}
+                    >
+                        <Text style={styles.text}> Previous </Text>
+                    </Pressable>
+                    <TouchableOpacity
+                        disabled={ disabledNext }
+                        style={ disabledNext ? styles.buttonDisabled : styles.button }
+                        onPress={() => setUrl(listPokemons.next)}
+                    >
+                        <Text style={styles.text}> Next </Text>
+                    </TouchableOpacity>
+                </SafeAreaView>
+            </View>
+        );
+    }
+
+    return(
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}><Text> Is loading... </Text></View>
     );
 }
 
