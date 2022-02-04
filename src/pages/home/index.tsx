@@ -3,7 +3,6 @@ import { StyleSheet, View, TextInput, TouchableOpacity, Pressable, Text, SafeAre
 import { ListPokemons } from "./listPokemons";
 
 interface Pokemon {
-    results: object,
     previous: string,
     next: string
 }
