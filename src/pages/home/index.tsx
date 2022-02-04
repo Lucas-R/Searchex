@@ -2,8 +2,18 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, View, TextInput, TouchableOpacity, Pressable, Text, SafeAreaView } from "react-native";
 import { ListPokemons } from "./listPokemons";
 
-export const Home = ({ navigation : { navigate }}) => {
-    const [listPokemons, setListPokemons] = useState({results:[]});
+interface Pokemon {
+    results: String,
+    previous: String,
+    next: String
+}
+
+interface RegistrationProps {
+    navigation: any;
+}
+
+export const Home = ({ navigation :  { navigate }} : RegistrationProps) => {
+    const [listPokemons, setListPokemons] = useState<Pokemon>({results:[]});
     const [searchPokemon, changeSearchPokemon] = useState('');
     const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon/?limit=99999');
     let disabledPrevious = listPokemons.previous == null ? true : false;

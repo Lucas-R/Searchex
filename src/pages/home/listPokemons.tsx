@@ -1,7 +1,6 @@
 import React from "react";
 import { FlatList, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 
-
 export const ListPokemons = ({ list, search, myNavigate }) => {
 
   const viewPokemon = (link) => {
